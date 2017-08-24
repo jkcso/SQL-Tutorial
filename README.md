@@ -1,0 +1,2 @@
+# SQLTutorial
+A SQL tutorial created by me that teaches step by step every aspect of the most famous database programming language.  We spend a bit of time to get the basics right and we then dive into more advanced stuff.  In this tutorial I am making use of a database and an editor found here: https://www.w3schools.com/sql/trysql.asp?filename=trysql_op_in, but please have a look in the ER-diagram.png for an overview of the relations.
