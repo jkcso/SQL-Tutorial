@@ -10,3 +10,9 @@ SELECT p.ProductName, p.Price, p.ProductID, o.Quantity
 FROM Products AS p JOIN OrderDetails AS o ON p.ProductID = o.ProductID
 WHERE p.ProductID = 11
 
+# Using JOIN, we can join as many relations as we like.
+SELECT o.OrderID, c.CustomerName, s.ShipperName, e.FirstName AS EmployeeFirstName, e.LastName AS EmployeeLastName
+FROM Orders o JOIN Customers c ON o.CustomerID = c.CustomerID
+			  JOIN Shippers s ON o.ShipperID = s.ShipperID
+              JOIN Employees e ON o.EmployeeID = e.EmployeeID
+WHERE o.OrderID = 10248
