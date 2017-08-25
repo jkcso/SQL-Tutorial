@@ -27,3 +27,13 @@ WHERE Products.Price > 50
 SELECT Customers.CustomerName as Name
 FROM Customers
 WHERE Customers.City = 'Barcelona'
+
+# Renaming can be applied in the FROM clause as well:
+SELECT c.CustomerName as Name
+FROM Customers AS c
+WHERE c.City = 'Madrid'
+
+# A shorcut is not to use AS at all in the FROM clause like:
+SELECT c.CustomerName as Name
+FROM Customers c
+WHERE c.City = 'Madrid'
