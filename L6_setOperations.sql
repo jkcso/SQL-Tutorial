@@ -29,6 +29,57 @@ INTERSECT
 SELECT SupplierName, Country
 FROM Suppliers
 
+# The following is going to select all the suppliers coming from the USA that have products priced more than £20.00.
+SELECT SupplierID
+FROM Suppliers
+WHERE Country = 'USA'
+INTERSECT
+SELECT SupplierID
+FROM Products
+WHERE price > 20
+
+# Another one, the following will return all the suppliers that are originated from the USA and what they supply is in the cateogy of 'Beverages'.
+SELECT SupplierID
+FROM Suppliers
+WHERE Country='USA'
+INTERSECT
+SELECT SupplierID
+FROM Products
+WHERE (SELECT CategoryID
+	   FROM Categories
+       WHERE CategoryName = 'Beverages')
+              
+# Note that the following is going to return an error because we are trying to use INTERSECT while we have 2 different SELECT followups.
+SELECT SupplierID, Name  # Name is not a field of Categories and this return an error.
+FROM Suppliers
+WHERE Country='USA'
+INTERSECT
+SELECT SupplierID
+FROM Products
+WHERE (SELECT CategoryID
+	   FROM Categories
+       WHERE CategoryName = 'Beverages')
+
+# Another one, guess what is returning:
+SELECT SupplierID
+FROM Suppliers
+WHERE Country='USA'
+INTERSECT
+SELECT SupplierID
+FROM Products
+WHERE ProductName = "Chef Anton's Gumbo Mix"
+
+# And now guess why this one returns no result:
+SELECT SupplierID
+FROM Suppliers
+WHERE Country='USA'
+INTERSECT
+SELECT SupplierID
+FROM Products
+WHERE (SELECT CategoryName
+	   FROM Categories
+       WHERE CategoryID > 0)
+
 # For the EXCEPT keyword we can use again the following, which is going to give us only the customers, a total of 91 records.
 SELECT CustomerName, Country
 FROM Customers
