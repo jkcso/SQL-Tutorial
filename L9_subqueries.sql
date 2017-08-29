@@ -53,25 +53,19 @@ WHERE (Unit, Price) IN (SELECT Unit, Price
 # Again, we can use JOIN for the above instead of subqueries.
                            
 # Moving now into set comparison, we can use subqueries to compare a value against some or all values returned by a subquery, using the SOME and ALL functions respectively.
-SELECT S1.SupplierName, S1.City, S1.Country
-FROM Suppliers S1
-WHERE S1.SupplierID > ANY (SELECT S2.SupplierID
-     					   FROM Suppliers S2
-                           WHERE S1.City = S2.City)     # currently returns syntax error.
+SELECT ProductName
+FROM Products
+WHERE ProductID = ANY (SELECT ProductID 
+					   FROM OrderDetails 
+                       WHERE Quantity = 10)
                            
-SELECT SupplierName, City, Country
-FROM Suppliers
-WHERE SupplierID > ANY (SELECT S.SupplierID
-						FROM Suppliers S JOIN Products P ON S.SupplierID = P.SupplierID
-                        WHERE P.Price > 10)             # currently returns syntax error.                           
-
 # In set subqueries we can use all the symbols like >, >= etc along with SOME, ANY and ALL.
 
 # 3) Relation subquery
 # A subquery that produces a relation.  Typically used as an operand of (i) JOIN, UNION, INTERSECT, EXCEPT, (iii) operators EXISTS or NOT EXISTS to test if a relation is empty or not, (iv) operators NOT UNIQUE or UNIQUE to test if a relation has duplicates or not.
-SELECT EmployeeID, FirstName, LastName
-FROM Employees E1
-WHERE BirthDate EXISTS (SELECT *
-						FROM Employees E2
-                       	WHERE E1.BirthDate = E2.BirthDate)  # currently returns syntax error.                           
+SELECT SupplierName
+FROM Suppliers
+WHERE EXISTS (SELECT ProductName 
+			  FROM Products 
+              WHERE SupplierId = Suppliers.supplierId AND Price < 20)                          
                         
