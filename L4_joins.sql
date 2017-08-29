@@ -34,3 +34,11 @@ WHERE Products.ProductID = 11
 # If we now omit the WHERE clause and use a query that is like the following, we are going to get back all the products that are part of OrderDetails.  Therefore it's like betting back the products which are sold.
 SELECT Products.ProductName, Products.Price, ProductID
 FROM Products JOIN OrderDetails ON Products.ProductID = OrderDetails.ProductID
+
+# An example which joins a lot of tables is the following:
+SELECT OD.OrderID, C.CustomerName, P.ProductName, S.ShipperName
+FROM OrderDetails OD
+JOIN Orders O ON OD.OrderID = O.OrderID 
+	JOIN Customers C ON C.CustomerID = O.CustomerID 
+	JOIN Shippers S ON S.ShipperID = O.ShipperID
+JOIN Products P ON P.ProductID = OD.ProductID
