@@ -1,4 +1,4 @@
-# LESSON 9 (A).
+# LESSON 10 (A).
 # Please DO try the following queries yourselves but most importantly try different variations and always ask yourself: "Why am I getting this back?".
 
 # The INSERT INTO statement.
@@ -16,7 +16,7 @@ VALUES ('Home')
 INSERT INTO Categories
 VALUES ('11', 'Home Furniture', 'Home Equipment')
 
-# LESSON 9 (B).
+# LESSON 10 (B).
 # Let's now talk about null values.  A field with a NULL value is a field which has no value, not 0, just nothing inside.  This happens when we insert or update a record and we don't include a value in an optional field.
 
 # Q: How do I test  for NULL values?
