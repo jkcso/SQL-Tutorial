@@ -18,3 +18,22 @@ WHERE Country='Spain'
 SELECT ProductName, Price
 FROM Products
 WHERE Price > 50
+
+# Moving quickly into a more advanced aspect of SELECT keyword we can see that this statement can be also used to choose the number of record returned.
+# This is useful on large tables with thousands of records since returning a large number of records can impact on performance.
+
+# The following returns 91 records.  Imagine a database with 91K customers.
+SELECT *
+FROM CUSTOMERS
+
+# This 2 following queries will return the first 5 customers.
+SELECT * 
+FROM Customers
+LIMIT 5
+
+SELECT TOP 5 * 
+FROM Customers
+
+# We can also use percentages here:
+SELECT TOP 50 PERCENT * 
+FROM Customers
