@@ -90,3 +90,13 @@ FROM OrderDetails OD JOIN Orders O ON OD.OrderID = O.OrderID
 GROUP BY OD.Quantity
 HAVING OD.Quantity > 45
 ORDER BY O.OrderDate
+
+# Last thing to show is BETWEEN keyword.
+# The following will select everything between these two, including the boundaries.
+SELECT * 
+FROM Products
+WHERE Price BETWEEN 10 AND 20
+
+SELECT * 
+FROM Orders
+WHERE OrderDate BETWEEN '01/01/1996' AND '31/12/1997'
