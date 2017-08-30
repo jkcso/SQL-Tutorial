@@ -82,3 +82,45 @@ CREATE TABLE Positions (
     Description varchar(255) NOT NULL
 )
 
+# 5] CHECK.
+# used to limit the value range that can be placed in a column.  If you define a CHECK constraint on a single column it allows only certain values for this column.  If you define a CHECK constraint on a table it can limit the values in certain columns based on values in other columns in the row.
+CREATE TABLE FootballPlayers (
+    PlayerID int NOT NULL PRIMARY KEY,
+    LastName varchar(255) NOT NULL,
+    FirstName varchar(255),
+    Age int NOT NULL,
+    Team varchar(255) NOT NULL
+    CHECK (Age >= 16)
+)
+
+# You can always add this later by doing:
+ALTER TABLE FootballPlayers
+ADD CHECK (Age>=18);
+
+# 6] DEFAULT.
+# used to provide a default value for a column.  The default value will be added to all new records IF no other value is specified.
+CREATE TABLE Orders (
+    ID int NOT NULL,
+    OrderNumber int NOT NULL,
+    OrderDate date DEFAULT GETDATE()
+)
+
+# 7] INDEX.
+#  Used to create indexes in tables.  Indexes are used to retrieve data from the database very fast. The users cannot see the indexes, they are just used to speed up searches/queries.  The tradeoff here is to use indexes only where is really useful and this is because updating a table with indexes takes more time than updating a table without (because the indexes also need an update). So, only create indexes on columns that will be frequently searched against.
+
+# Creates an index on customer lastname.
+CREATE INDEX idx_lastname
+ON Customers (CustomerName)
+
+# Creates an index on orderID and customerID.
+CREATE INDEX idx_ordCust
+ON Orders (OrderID, CustomerID)
+
+# To drop an index you do:
+DROP INDEX idx_lastname
+
+# NOTE: You don't select directly from the index. You select from the table.  If the index is appropriate, SQL Server will use it when you do that.  Indexing is like: what is the use of having an index in a book? perhaps to allow you to find the page where some information you are looking for is instead of having to read the whole book from page one. 
+
+# To *test* if the index is working we are using the following syntax:
+SELECT *
+FROM Orders WITH (INDEX(idx_ordCust))
