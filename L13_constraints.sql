@@ -116,6 +116,10 @@ ON Customers (CustomerName)
 CREATE INDEX idx_ordCust
 ON Orders (OrderID, CustomerID)
 
+# We can also create unique indexed by doing:
+CREATE UNIQUE INDEX idx_ordCustUnique
+ON Orders (OrderID, CustomerID)
+
 # To drop an index you do:
 DROP INDEX idx_lastname
 
